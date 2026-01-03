@@ -1,0 +1,18 @@
+from flask import Flask
+from config import Config
+from models import db
+from controllers.auth import auth_bp
+from controllers.user import user_bp
+from controllers.admin import admin_bp
+
+app = Flask(__name__)
+app.config.from_object(Config)
+
+db.init_app(app)
+
+app.register_blueprint(auth_bp)
+app.register_blueprint(user_bp)
+app.register_blueprint(admin_bp)
+
+if __name__ == "__main__":
+    app.run(debug=True)
